@@ -1,0 +1,35 @@
+# Colab cells for RVC-style conversion
+# Paste each cell below into a separate code cell in a new Colab notebook.
+
+# Cell A — Mount Drive (Python)
+from google.colab import drive
+drive.mount('/content/drive')
+# Make sure you have created the folder: MyDrive/VoiceCloneApp/
+
+# Cell B — Install dependencies & clone repo (Bash)
+# Run as a bash cell (prefix with ! in Colab)
+!apt -y update
+!apt -y install ffmpeg -qq
+!pip install -q torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu118
+# Clone a community repo (example placeholder — replace if you prefer a different repo)
+!git clone https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI.git rvc_repo || true
+
+# Cell C — Model weights placement (Bash)
+# Create models dir. Add model weights manually or via wget if you have URLs.
+!mkdir -p /content/models
+echo "Place model checkpoint files under /content/models or edit this cell with wget links to download them."
+
+# Cell D — Ensure your WAVs are in Drive (Python)
+# Put your source.wav and reference.wav in MyDrive/VoiceCloneApp/
+print("Upload your source.wav and reference.wav to MyDrive/VoiceCloneApp/ using Google Drive UI.")
+
+# Cell E — Run conversion (Bash example)
+# Replace this command with the actual inference command for the repo you cloned.
+!python /content/rvc_repo/inference.py \
+  --source "/content/drive/MyDrive/VoiceCloneApp/source.wav" \
+  --ref "/content/drive/MyDrive/VoiceCloneApp/reference.wav" \
+  --output "/content/drive/MyDrive/VoiceCloneApp/output.wav" \
+  --models_dir /content/models || echo "Replace with the repo's actual inference command."
+
+# Cell F — Optional: convert WAV -> MP3 on Colab (Bash)
+!ffmpeg -y -i "/content/drive/MyDrive/VoiceCloneApp/output.wav" -af "loudnorm=I=-16:TP=-1.5:LRA=11" -ar 44100 -ac 2 -b:a 320k "/content/drive/MyDrive/VoiceCloneApp/output.mp3"

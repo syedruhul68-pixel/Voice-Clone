@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Define missing theme attribute so resource linking succeeds -->
+    <attr name="colorBackground" format="reference|color" />
+</resources>

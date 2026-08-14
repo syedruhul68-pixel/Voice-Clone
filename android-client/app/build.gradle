@@ -51,7 +51,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.10.0'
 
     // FFmpegKit for on-device MP3 conversion
-    implementation 'com.arthenica:ffmpeg-kit-min:5.1.LTS'
+    implementation 'com.arthenica:ffmpeg-kit-min:4.5.LTS'
 
     // Coil for image loading (optional)
     implementation "io.coil-kt:coil-compose:2.3.0"

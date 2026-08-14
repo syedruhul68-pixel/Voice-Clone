@@ -40,6 +40,7 @@ android {
 
 dependencies {
     implementation "androidx.core:core-ktx:1.12.0"
+    implementation "androidx.appcompat:appcompat:1.6.1"
     implementation "androidx.activity:activity-compose:1.8.0"
     implementation "androidx.compose.ui:ui:1.6.0"
     implementation "androidx.compose.material:material:1.6.0"
@@ -50,8 +51,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.11.0'
     implementation 'com.google.android.material:material:1.10.0'
 
-    // FFmpegKit for on-device MP3 conversion
-    // NOTE: removed temporarily — will re-add once we confirm the correct artifact coordinates or repository
+    // FFmpegKit for on-device MP3 conversion (removed for CI troubleshooting)
     // implementation 'com.arthenica:ffmpeg-kit-min:4.5.LTS'
 
     // Coil for image loading (optional)

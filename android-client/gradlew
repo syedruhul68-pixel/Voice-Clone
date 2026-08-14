@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+GRADLE_VERSION=8.1.1
+INSTALL_BASE="$HOME/.gradle"
+DIST_ZIP="$INSTALL_BASE/gradle-${GRADLE_VERSION}-bin.zip"
+DIST_DIR="$INSTALL_BASE/gradle-${GRADLE_VERSION}"
+GRADLE_BIN="$DIST_DIR/bin/gradle"
+
+if [ ! -x "$GRADLE_BIN" ]; then
+  mkdir -p "$INSTALL_BASE"
+  echo "Downloading Gradle $GRADLE_VERSION..."
+  wget -q "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" -O "$DIST_ZIP"
+  unzip -q "$DIST_ZIP" -d "$INSTALL_BASE"
+  rm -f "$DIST_ZIP"
+fi
+
+exec "$GRADLE_BIN" "$@"

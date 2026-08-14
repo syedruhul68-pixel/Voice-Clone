@@ -43,10 +43,11 @@ jobs:
           echo "android-client files:"
           ls -la android-client || true
 
-      - name: Build Debug APK (use repo gradle script)
+      - name: Build Debug APK (use repo gradle script from android-client)
+        working-directory: android-client
         run: |
           # run the script with bash so executable bit isn't required
-          bash android-client/gradlew :android-client:assembleDebug --no-daemon --stacktrace
+          bash ./gradlew assembleDebug --no-daemon --stacktrace
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4

@@ -22,7 +22,7 @@ jobs:
           java-version: '17'
 
       - name: Install required packages
-        run: sudo apt-get update && sudo apt-get install -y wget unzip gradle
+        run: sudo apt-get update && sudo apt-get install -y wget unzip
 
       - name: Install Android command line tools and SDK components
         run: |
@@ -37,14 +37,16 @@ jobs:
           yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-34" "build-tools;34.0.0"
 
       - name: Show repo files (debug)
-        run: ls -la && ls -la android-client || true
+        run: |
+          echo "Repo root files:"
+          ls -la
+          echo "android-client files:"
+          ls -la android-client || true
 
-      - name: Check Gradle version (debug)
-        run: gradle --version
-
-      - name: Build Debug APK (using system gradle)
-        run: gradle assembleDebug --stacktrace
-        working-directory: android-client
+      - name: Build Debug APK (use repo gradle script)
+        run: |
+          # run the script with bash so executable bit isn't required
+          bash android-client/gradlew :android-client:assembleDebug --no-daemon --stacktrace
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4

@@ -1,15 +1,13 @@
 rootProject.name = "Voice-Clone"
 
 dependencyResolutionManagement {
-    // Make the project use the repositories declared here (not project/module repositories)
+    // Ensure project uses the repositories declared here, not per-project repositories
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
 
     repositories {
-        // Required for AndroidX/Compose artifacts
         google()
-        // Required for many libraries
         mavenCentral()
-        // Optional, keep if you use libraries from JitPack
+        // optional if you use artifacts from jitpack
         maven { url 'https://jitpack.io' }
     }
 }
